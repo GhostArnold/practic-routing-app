@@ -1,6 +1,9 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
-
+import Home from './components/Home';
+import About from './components/About';
+import Contact from './components/Contact';
+import NotFound from './components/NotFound';
 function App() {
   return (
     // Обязательный тег, который нужен для обозначения того, что внутри сайта испоьзуется роутинг. future - флаг, для того
@@ -10,10 +13,24 @@ function App() {
         {/* Тег, где хранятся сами маршруты */}
         <Routes>
           {/* Route - определённый маршрут */}
-          <Route path="/" element={<h1>Home</h1>} />
-          <Route path="about" element={<h1>About</h1>} />
-          <Route path="contacts" element={<h1>Contacts</h1>} />
-          <Route path="*" element={<h1>Not found</h1>} />
+          <Route path="/" element={<Home />} />
+          <Route
+            path="about"
+            element={
+              <h1>
+                <About />
+              </h1>
+            }
+          />
+          <Route
+            path="contacts"
+            element={
+              <h1>
+                <Contact />
+              </h1>
+            }
+          />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
     </BrowserRouter>
