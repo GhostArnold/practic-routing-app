@@ -4,6 +4,7 @@ import Home from './components/Home';
 import About from './components/About';
 import Contact from './components/Contact';
 import NotFound from './components/NotFound';
+import MainLayout from './layouts/MainLayout';
 function App() {
   return (
     // Обязательный тег, который нужен для обозначения того, что внутри сайта испоьзуется роутинг. future - флаг, для того
@@ -13,8 +14,9 @@ function App() {
         {/* Тег, где хранятся сами маршруты */}
         <Routes>
           {/* Route - определённый маршрут */}
-          {/* Помещаем все маршруты в маршрут home, чтобы её содержимое отражалось на всех других страницах */}
-          <Route path="/" element={<Home />}>
+          <Route path="/" element={<MainLayout />}>
+            {/* index - значит, что маршрут по умолчанию, который в родительском маршруте */}
+            <Route element={<Home />} index />
             <Route
               path="about"
               element={
