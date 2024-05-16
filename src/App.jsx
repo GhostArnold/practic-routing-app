@@ -13,24 +13,26 @@ function App() {
         {/* Тег, где хранятся сами маршруты */}
         <Routes>
           {/* Route - определённый маршрут */}
-          <Route path="/" element={<Home />} />
-          <Route
-            path="about"
-            element={
-              <h1>
-                <About />
-              </h1>
-            }
-          />
-          <Route
-            path="contacts"
-            element={
-              <h1>
-                <Contact />
-              </h1>
-            }
-          />
-          <Route path="*" element={<NotFound />} />
+          {/* Помещаем все маршруты в маршрут home, чтобы её содержимое отражалось на всех других страницах */}
+          <Route path="/" element={<Home />}>
+            <Route
+              path="about"
+              element={
+                <h1>
+                  <About />
+                </h1>
+              }
+            />
+            <Route
+              path="contacts"
+              element={
+                <h1>
+                  <Contact />
+                </h1>
+              }
+            />
+            <Route path="*" element={<NotFound />} />
+          </Route>
         </Routes>
       </div>
     </BrowserRouter>
