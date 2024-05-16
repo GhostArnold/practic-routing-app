@@ -1,6 +1,12 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
-
+import Home from './components/Home';
+import About from './components/About';
+import Contacts from './components/Contacts';
+import NotFound from './components/NotFound';
+import MainLayout from './layouts/MainLayout';
+import Courses from './components/Courses';
+import SingleCourse from './components/SingleCourse';
 function App() {
   return (
     // Обязательный тег, который нужен для обозначения того, что внутри сайта испоьзуется роутинг. future - флаг, для того
@@ -10,10 +16,17 @@ function App() {
         {/* Тег, где хранятся сами маршруты */}
         <Routes>
           {/* Route - определённый маршрут */}
-          <Route path="/" element={<h1>Home</h1>} />
-          <Route path="about" element={<h1>About</h1>} />
-          <Route path="contacts" element={<h1>Contacts</h1>} />
-          <Route path="*" element={<h1>Not found</h1>} />
+          <Route path="/" element={<MainLayout />}>
+            {/* index - значит, что маршрут по умолчанию, который в родительском маршруте */}
+            <Route element={<Home />} index />
+            <Route path="courses" element={<Courses />} />
+            {/* Отдельный курс, который идёт как дополнение к маршруту course */}
+            <Route path="courses/:slug" element={<SingleCourse />} />
+            <Route path="about" element={<About />} />
+            <Route path="contacts" element={<Contacts />} />
+
+            <Route path="*" element={<NotFound />} />
+          </Route>
         </Routes>
       </div>
     </BrowserRouter>
