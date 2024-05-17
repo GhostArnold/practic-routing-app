@@ -1,12 +1,17 @@
 import courses from '../data/course';
 import { Link, useParams } from 'react-router-dom';
+import NotFound from './NotFound';
 const SingleCourse = () => {
   // Хук useParams используется для получения текущих параметров маршрута
   const params = useParams();
   // Ищем объект slug которого совпадает с значением объекта params(текущем параметром)
   const course = courses.find((course) => course.slug === params.courseSlug);
-  // Логируем параметры маршрута в консоль
-  console.log(params);
+
+  // Если совпадения по course не найдены, то выыодим компонент NotFound
+  if (!course) {
+    return <NotFound />;
+  }
+
   return (
     <>
       {/* Выводим данные о курсе */}
