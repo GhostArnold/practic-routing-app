@@ -1,5 +1,5 @@
 import courses from '../data/course';
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 // import NotFound from './NotFound';
 import { useEffect } from 'react';
 const SingleCourse = () => {
@@ -10,9 +10,6 @@ const SingleCourse = () => {
 
   //  Хук который используется для программной навигации.
   const navigate = useNavigate();
-  // Хук для получение информации из текущей ссылки
-  const location = useLocation();
-  console.log(location);
 
   // Если совпадения по course не найдены, то выводим компонент NotFound
   // if (!course) {
