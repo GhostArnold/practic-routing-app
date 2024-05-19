@@ -20,8 +20,8 @@ function App() {
             {/* index - значит, что маршрут по умолчанию, который в родительском маршруте */}
             <Route element={<Home />} index />
             <Route path="courses" element={<Courses />} />
-            {/* Отдельный курс, который идёт как дополнение к маршруту course */}
-            <Route path="courses/:slug" element={<SingleCourse />} />
+            {/* Отдельный курс, который идёт как дополнение к маршруту course, называется параметр маршрута */}
+            <Route path="courses/:courseSlug" element={<SingleCourse />} />
             <Route path="about" element={<About />} />
             <Route path="contacts" element={<Contacts />} />
 
