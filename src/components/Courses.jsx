@@ -1,15 +1,17 @@
 // Делаем импорт массива объектов
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import queryString from 'query-string';
 import courses from '../data/course';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
+const SORT_KEYS = ['title', 'slug', 'id'];
 
 // Функция для сортировки
 function sortCourses(courses, key) {
   // Создаем копию массива, чтобы не изменять исходный массив
   const sortedCourses = [...courses];
-  // Если ключ undefind (его нету), то массив курсов выводится в оригинальном порядке
-  if (!key) {
+  // Если ключ undefined (его нету), то массив курсов выводится в оригинальном порядке
+  if (!key || !SORT_KEYS.includes(key)) {
     return sortedCourses;
   }
   // Сортируем массив по значению ключа
@@ -21,8 +23,9 @@ function sortCourses(courses, key) {
 const Courses = () => {
   // useLocation - хук, который возвращает информацию о строке текущего URL адреса
   const location = useLocation();
-  // Записываем веременную результат свойства объекта location - search. Это например ?sort=id (сохранит в объекте "id")
+  // Записываем переменную результат свойства объекта location - search. Это например ?sort=id (сохранит в объекте "id")
   const query = queryString.parse(location.search);
+  const navigate = useNavigate();
   // useState - хук, который сохраняет значение ключа для сортировки
   const [sortKey, setSortKey] = useState(query.sort);
   console.log(sortKey);
@@ -32,6 +35,16 @@ const Courses = () => {
   const [sortedCourses, setSortedCourses] = useState(
     sortCourses(courses, sortKey)
   );
+
+  useEffect(() => {
+    if (!SORT_KEYS.includes(sortKey)) {
+      // Если ключ недопустим, перенаправляем на текущий маршрут без параметров сортировки и сбрасываем состояния
+      navigate('.');
+      setSortKey();
+      setSortedCourses([...courses]);
+    }
+  }, [sortKey, navigate]);
+
   return (
     <>
       <h1>{sortKey ? `Courses sorted by ${sortKey}` : 'Courses'}</h1>
